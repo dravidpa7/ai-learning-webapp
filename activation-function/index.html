@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sigmoid Equation</title>
+  <!-- Load MathJax -->
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    /* * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    } */
+
+    body {
+      background-color: white; /* Match your image's peach background */
+      font-family: 'Georgia', serif;
+      padding: 2rem;
+      
+    }
+    h4,input,button,textarea{
+      display: block;
+      margin: 0px 0px 10px 0px;
+    }
+    .parent{
+      padding: 19px;
+      max-width: 40rem;
+      font-size: 1.3rem;
+    }
+    .container{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+    } 
+    .form-design{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background-color: rgb(42, 42, 42);
+      color: white;
+      width: 20rem;
+      border-radius: 0.7rem;
+      margin: 1rem auto; /* centers horizontally */
+      text-align: center;
+    }
+
+    .inputdesign{
+      width: 85%;
+      max-width: 85%;
+      border-radius: 0.3rem;
+    }
+
+    @media  screen and (max-width: 320px) {
+      .container{
+        
+        display: flex;
+        flex-direction: column;
+        
+      } 
+    }
+      
+
+
+  </style>
+</head>
+<body>
+  <a href="corrected-version.html"><button>improved structure</button></a>
+  <h1 style="text-align: center;">Activation Function Neural Network</h1>
+    <div class="container" >
+      <div class="parent">
+        <h2>Sigmoid (logistic)</h2>
+        <h3>Folmula:</h3>
+        <p>
+          \( P(y = 1 \mid X) = \text{sigmoid}(z) = \frac{1}{1 + e^{-z}} \)
+        </p>
+        <p><strong>Range:</strong> (0, 1) <strong>Use case:</strong> Probability problems</p>
+        <h3>Real-time example:</h3>
+        <ul>
+            <li>Spam detection: output tells how likely an email is spam (e.g., 0.9 → 90% spam).</li>
+            <li>Logistic regression output neuron.</li>
+        </ul> 
+      </div>
+      <div class="child">
+        <a href="next.html"><img src="./assert/Sigmoid" width=450rem alt="sigmoid"> </a> 
+      </div>
+    </div>
+    <hr>
+    <div class="container" >
+      <div class="parent">
+        <h2>Tanh (Hyperbolic Tangent)</h2>
+        <h3>Folmula:</h3>
+        <p>
+            \( \tanh(z) = \frac {e^z - e{-z}}{e^z + e{-z}}\)
+        </p>        
+        <p><strong>Range:</strong>(-1, 1)<strong> Use case:</strong>When you need zero-centered output.</p>
+        <h3>Real-time example:</h3>
+        <ul>
+            <li>Sentiment score (e.g., product review scoring: -1 → negative, +1 → positive).</li>
+            <li>RNN hidden layers (better convergence than sigmoid).</li>
+        </ul> 
+      </div>
+      <div class="child">
+        <img src="./assert/tanh" width=450rem alt="tanh" >
+      </div>
+        
+    </div>
+    <hr>
+    <div class="container" >
+      <div class="parent">
+        <h2>ReLU (Rectified Linear Unit)</h2>
+        <h3>Folmula:</h3>
+        <p>
+          \( \text{ReLU}(z) = \max(0, z) \)
+        </p>
+        <p><strong>Range:</strong>[0, ∞]<strong> Use case:</strong>Deep neural networks — default for most modern networks.</p>
+        <h3>Real-time example:</h3>
+        <ul>
+            <li>Image recognition (CNNs): activates only when features are detected (e.g., edge present → positive activation, no edge → 0).</li>
+        </ul> 
+      </div>
+      <div class="child">
+        <img src="./assert/relu" width=460rem alt="relu" >
+      </div>
+        
+        
+    </div>
+    <br>
+
+<table>
+
+</table>
+
+<form action="" class="form-design">
+    <p>Get in touch</p>
+    <input type="text" placeholder="name"class="inputdesign">
+    <input type="email" placeholder="email"class="inputdesign">
+    <textarea name="" id="" placeholder="message"class="inputdesign"></textarea>
+    <a href="thankyou.html" style="text-decoration: none;"><input  style="border-radius: 0.3rem;" type="button" value="submit"></a>
+</form>
+
+</body>
+</html>

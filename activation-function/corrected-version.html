@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activation Functions - Neural Network</title>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Georgia', serif;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .main-header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      margin-bottom: 2rem;
+    }
+
+    .main-header h1 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      margin-bottom: 0.5rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .function-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .function-content h2 {
+      color: #2c3e50;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .function-content h3 {
+      color: #34495e;
+      margin: 1rem 0 0.5rem 0;
+      font-size: 1.1rem;
+    }
+
+    .function-content p {
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .function-content ul {
+      margin-left: 1.2rem;
+      font-size: 0.95rem; /* Explicitly set smaller font for lists */
+    }
+
+    .function-content li {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem; /* Override inheritance */
+    }
+
+    .range-info {
+      background: #e8f4f8;
+      padding: 0.8rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+    }
+
+    .range-info strong {
+      color: #2980b9;
+    }
+
+    .function-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 250px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border: 2px dashed #ddd;
+    }
+
+    .placeholder-chart {
+      text-align: center;
+      color: #666;
+      padding: 2rem;
+    }
+
+    .placeholder-chart::before {
+      content: "📊";
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    /* Contact Form Styles */
+    .contact-section {
+      background: #2c3e50;
+      color: white;
+      padding: 3rem 0;
+      margin-top: 3rem;
+    }
+
+    .contact-form {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+    }
+
+    .contact-form h3 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .form-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #3498db;
+    }
+
+    .form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background: #2980b9;
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+      .function-section {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .function-content {
+        order: 1;
+      }
+
+      .function-visual {
+        order: 2;
+        min-height: 200px;
+      }
+
+      .function-content h2 {
+        font-size: 1.3rem;
+      }
+
+      .function-content p {
+        font-size: 0.9rem;
+      }
+
+      .function-content ul {
+        font-size: 0.85rem;
+      }
+
+      .function-content li {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .container {
+        padding: 0 0.5rem;
+      }
+
+      .function-section {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .contact-form {
+        padding: 1.5rem;
+        margin: 0 1rem;
+      }
+
+      .main-header {
+        padding: 1.5rem 1rem;
+      }
+    }
+
+    /* Accessibility improvements */
+    @media (prefers-reduced-motion: reduce) {
+      .submit-btn {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <h1>Activation Functions in Neural Networks</h1>
+    <p>Learn the key activation functions used in deep learning</p>
+  </header>
+
+  <main class="container">
+    <!-- Sigmoid Function -->
+    <section class="function-section">
+      <div class="function-content">
+        <h2>Sigmoid (Logistic)</h2>
+        <h3>Formula:</h3>
+        <p>
+          \( P(y = 1 \mid X) = \text{sigmoid}(z) = \frac{1}{1 + e^{-z}} \)
+        </p>
+        <div class="range-info">
+          <p><strong>Range:</strong> (0, 1) | <strong>Use case:</strong> Probability problems</p>
+        </div>
+        <h3>Real-world Examples:</h3>
+        <ul>
+          <li>Spam detection: Output tells how likely an email is spam (e.g., 0.9 → 90% spam probability)</li>
+          <li>Binary classification in logistic regression</li>
+          <li>Output layer for probability estimation tasks</li>
+        </ul>
+      </div>
+      <div class="function-visual">
+        <div class="placeholder-chart">
+          <div>Sigmoid Function Graph</div>
+          <small>S-shaped curve from 0 to 1</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tanh Function -->
+    <section class="function-section">
+      <div class="function-content">
+        <h2>Tanh (Hyperbolic Tangent)</h2>
+        <h3>Formula:</h3>
+        <p>
+          \( \tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}} \)
+        </p>
+        <div class="range-info">
+          <p><strong>Range:</strong> (-1, 1) | <strong>Use case:</strong> Zero-centered output</p>
+        </div>
+        <h3>Real-world Examples:</h3>
+        <ul>
+          <li>Sentiment analysis: Score from -1 (negative) to +1 (positive)</li>
+          <li>RNN hidden layers for better gradient flow</li>
+          <li>Feature normalization in preprocessing</li>
+        </ul>
+      </div>
+      <div class="function-visual">
+        <div class="placeholder-chart">
+          <div>Tanh Function Graph</div>
+          <small>S-shaped curve from -1 to 1</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ReLU Function -->
+    <section class="function-section">
+      <div class="function-content">
+        <h2>ReLU (Rectified Linear Unit)</h2>
+        <h3>Formula:</h3>
+        <p>
+          \( \text{ReLU}(z) = \max(0, z) \)
+        </p>
+        <div class="range-info">
+          <p><strong>Range:</strong> [0, ∞] | <strong>Use case:</strong> Default for deep networks</p>
+        </div>
+        <h3>Real-world Examples:</h3>
+        <ul>
+          <li>Image recognition (CNNs): Activates when features are detected</li>
+          <li>Hidden layers in most modern deep networks</li>
+          <li>Computationally efficient for large networks</li>
+        </ul>
+      </div>
+      <div class="function-visual">
+        <div class="placeholder-chart">
+          <div>ReLU Function Graph</div>
+          <small>Linear for positive, zero for negative</small>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="container">
+      <form class="contact-form" action="#" method="POST">
+        <h3>Get in Touch</h3>
+        <div class="form-group">
+          <input type="text" class="form-input" placeholder="Your Name" required aria-label="Name">
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-input" placeholder="Your Email" required aria-label="Email">
+        </div>
+        <div class="form-group">
+          <textarea class="form-input form-textarea" placeholder="Your Message" required aria-label="Message"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+  </section>
+</body>
+</html>
