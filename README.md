@@ -1,3 +1,3 @@
 # ai-learning-webapp
 
-live link : https://activation-function.netlify.app/ (not responsive)
+live link : https://activation-function.netlify.app/ (not responsive - mobile view)
